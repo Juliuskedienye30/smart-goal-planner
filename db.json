@@ -1,0 +1,13 @@
+{
+  "goals": [
+    {
+      "id": "04d4",
+      "name": "Employment ",
+      "targetAmount": 120000,
+      "savedAmount": 0,
+      "category": "Junior",
+      "deadline": "2025-08-08",
+      "createdAt": "2025-07-18"
+    }
+  ]
+}

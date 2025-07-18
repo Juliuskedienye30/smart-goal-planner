@@ -1,0 +1,23 @@
+/* src/Components/Overview.css */
+
+.overview {
+  background: white;
+  border: 1px solid #ddd;
+  padding: 1rem;
+  border-radius: 6px;
+  margin-bottom: 1rem;
+}
+
+.overview p {
+  margin: 0.5rem 0;
+}
+
+.warning {
+  color: orange;
+  font-weight: bold;
+}
+
+.overdue {
+  color: red;
+  font-weight: bold;
+}
