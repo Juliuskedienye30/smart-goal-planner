@@ -8,6 +8,24 @@
       "category": "Junior",
       "deadline": "2025-08-08",
       "createdAt": "2025-07-18"
+    },
+    {
+      "id": "ee8c",
+      "name": "6",
+      "targetAmount": 34,
+      "savedAmount": 0,
+      "category": "44t",
+      "deadline": "2025-07-19",
+      "createdAt": "2025-07-19"
+    },
+    {
+      "id": "2b79",
+      "name": "Graduation",
+      "targetAmount": 200000,
+      "savedAmount": 0,
+      "category": "Post",
+      "deadline": "2025-07-10",
+      "createdAt": "2025-07-19"
     }
   ]
 }

@@ -1,5 +1,5 @@
 import React from 'react';
-import './Overview.css';
+
 // Helper to get days left
 function getDaysLeft(deadline) {
   const today = new Date();

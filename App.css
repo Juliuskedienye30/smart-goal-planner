@@ -1,0 +1,67 @@
+/* App.css */
+
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&family=Pacifico&display=swap');
+
+/* Global font and background */
+body {
+  font-family: 'Montserrat', sans-serif;
+  background: linear-gradient(135deg, #fce4ec, #f3e5f5);
+  color: #3c1053;
+  margin: 0;
+  padding: 0;
+}
+
+/* Center everything inside the root container */
+#root {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+}
+
+/* Custom container style */
+.baddie-container {
+  background: white;
+  border-radius: 1rem;
+  padding: 2rem;
+  box-shadow: 0 10px 25px rgba(255, 105, 180, 0.3);
+  max-width: 800px;
+  width: 90%;
+  transition: transform 0.3s ease;
+}
+
+.baddie-container:hover {
+  transform: scale(1.02);
+}
+
+/* Fancy title */
+.baddie-title {
+  font-family: 'Pacifico', cursive;
+  font-size: 2.5rem;
+  color: #c2185b;
+  text-align: center;
+  margin-bottom: 1rem;
+}
+
+/* Overview section enhancements */
+.overview p {
+  font-size: 1rem;
+  margin: 0.5rem 0;
+}
+
+.overview strong {
+  color: #8e24aa;
+}
+
+.overview span {
+  font-weight: bold;
+}
+
+/* Add custom tags for warnings */
+.warning {
+  color: orange;
+}
+
+.overdue {
+  color: red;
+}
