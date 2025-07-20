@@ -1,4 +1,6 @@
-const API_URL = "http://localhost:3000/goals";
+
+const API_URL = "https://smart-goal-planner-amk0.onrender.com/goals";
+
 
 export const getGoals = async () => {
   const res = await fetch(API_URL);
