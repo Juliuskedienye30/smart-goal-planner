@@ -1,68 +1,73 @@
 import React, { useState } from 'react';
 
-function DepositForm({ goals, onUpdateGoal }) {
-  const [selectedGoalId, setSelectedGoalId] = useState('');
+function DepositForm({ goals, onDeposit }) {
+  const [goalId, setGoalId] = useState('');
   const [amount, setAmount] = useState('');
+  const [message, setMessage] = useState(null);
 
-  const handleDeposit = (e) => {
+  const handleSubmit = (e) => {
     e.preventDefault();
-    if (!selectedGoalId || !amount) {
-      alert("Select a goal and enter an amount");
+
+    const selectedGoal = goals.find(goal => goal.id === goalId);
+    if (!selectedGoal) {
+      setMessage({ type: 'error', text: 'No goal found!' });
       return;
     }
 
-    const goalToUpdate = goals.find(
-      (g) => g.id === Number(selectedGoalId) // Fix: convert to number
-    );
+    const newAmount = selectedGoal.savedAmount + parseFloat(amount);
 
-    if (!goalToUpdate) {
-      alert("Goal not found");
-      return;
-    }
-
-    const updatedGoal = {
-      ...goalToUpdate,
-      savedAmount: goalToUpdate.savedAmount + parseFloat(amount),
-    };
-
-    onUpdateGoal(updatedGoal);
-
-    setAmount('');
-    setSelectedGoalId('');
+    fetch(`http://localhost:3000/goals/${goalId}`, {
+      method: 'PATCH',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({ savedAmount: newAmount })
+    })
+      .then(res => {
+        if (!res.ok) throw new Error('Failed to deposit');
+        return res.json();
+      })
+      .then(updatedGoal => {
+        onDeposit(updatedGoal);
+        setMessage({ type: 'success', text: 'Deposit successful!' });
+        setGoalId('');
+        setAmount('');
+      })
+      .catch(() => {
+        setMessage({ type: 'error', text: 'Something went wrong.' });
+      });
   };
 
   return (
-    <form onSubmit={handleDeposit}>
-      <h3>Deposit to a Goal</h3>
-
-      <select
-        value={selectedGoalId}
-        onChange={(e) => setSelectedGoalId(e.target.value)}
-        required
-      >
-        <option value="">-- Select a Goal --</option>
-        {goals.length === 0 ? (
-          <option disabled>No goals available</option>
-        ) : (
-          goals.map((goal) => (
+    <div className="card">
+      <h3>Make a Deposit</h3>
+      <form onSubmit={handleSubmit}>
+        <select value={goalId} onChange={(e) => setGoalId(e.target.value)} required>
+          <option value="">Select a goal</option>
+          {goals.map(goal => (
             <option key={goal.id} value={goal.id}>
               {goal.name}
             </option>
-          ))
-        )}
-      </select>
+          ))}
+        </select>
 
-      <input
-        type="number"
-        step="0.01"
-        placeholder="Amount"
-        value={amount}
-        onChange={(e) => setAmount(e.target.value)}
-        required
-      />
+        <input
+          type="number"
+          placeholder="Amount"
+          value={amount}
+          onChange={(e) => setAmount(e.target.value)}
+          required
+        />
 
-      <button type="submit">Deposit</button>
-    </form>
+        <button type="submit">Deposit</button>
+      </form>
+
+      {message && (
+        <p style={{ color: message.type === 'error' ? 'red' : 'lightgreen', marginTop: '10px' }}>
+          {message.text}
+        </p>
+      )}
+    </div>
   );
 }
 

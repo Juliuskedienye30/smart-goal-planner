@@ -1,49 +1,28 @@
 import React from 'react';
 
-// Helper to get days left
-function getDaysLeft(deadline) {
-  const today = new Date();
-  const due = new Date(deadline);
-  const diff = due - today;
-  return Math.ceil(diff / (1000 * 60 * 60 * 24));
-}
-
 function Overview({ goals }) {
-  const totalGoals = goals.length;
-  const totalSaved = goals.reduce((sum, goal) => sum + goal.savedAmount, 0);
+  if (!goals || goals.length === 0) {
+    return (
+      <div className="card">
+        <h3>Overview</h3>
+        <p>No goals yet. Add one to get started!</p>
+      </div>
+    );
+  }
 
-  const completedGoals = goals.filter(
-    (g) => g.savedAmount >= g.targetAmount
-  ).length;
+  const totalSaved = goals.reduce((sum, g) => sum + g.savedAmount, 0);
+  const totalTarget = goals.reduce((sum, g) => sum + g.targetAmount, 0);
+  const completedGoals = goals.filter(g => g.savedAmount >= g.targetAmount).length;
+  const overdueGoals = goals.filter(g => new Date(g.deadline) < new Date() && g.savedAmount < g.targetAmount).length;
 
   return (
-    <div className="overview">
+    <div className="card">
       <h3>Overview</h3>
-      <p>Total Goals: {totalGoals}</p>
-      <p>Total Saved: ${totalSaved}</p>
-      <p>Goals Completed: {completedGoals}</p>
-
-      {goals.map((goal) => {
-        const daysLeft = getDaysLeft(goal.deadline);
-        const isCompleted = goal.savedAmount >= goal.targetAmount;
-        const isOverdue = daysLeft < 0 && !isCompleted;
-        const isWarning = daysLeft >= 0 && daysLeft <= 30 && !isCompleted;
-
-        return (
-          <div key={goal.id}>
-            <strong>{goal.name}</strong>:
-            {isOverdue && (
-              <span style={{ color: 'red' }}> Overdue!</span>
-            )}
-            {isWarning && (
-              <span style={{ color: 'orange' }}>
-                {' '}
-                Deadline in {daysLeft} days!
-              </span>
-            )}
-          </div>
-        );
-      })}
+      <p><strong>Total Goals:</strong> {goals.length}</p>
+      <p><strong>Completed Goals:</strong> {completedGoals}</p>
+      <p><strong>Overdue Goals:</strong> {overdueGoals}</p>
+      <p><strong>Total Saved:</strong> ${totalSaved.toLocaleString()}</p>
+      <p><strong>Total Target:</strong> ${totalTarget.toLocaleString()}</p>
     </div>
   );
 }
