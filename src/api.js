@@ -1,4 +1,4 @@
- const API_URL = "http://localhost:3000/goals";
+ const API_URL = "https://goal-planner-api-c30z.onrender.com/goals";
 
 
 export const getGoals = async () => {
