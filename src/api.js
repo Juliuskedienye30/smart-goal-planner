@@ -1,6 +1,6 @@
  const API_URL = "https://goal-planner-api-c30z.onrender.com/goals";
 
-
+// https://goal-planner-api-c30z.onrender.com/goals
 export const getGoals = async () => {
   const res = await fetch(API_URL);
   return res.json();

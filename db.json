@@ -26,6 +26,24 @@
       "category": "Softaware Engineer",
       "deadline": "2025-07-08",
       "createdAt": "2025-07-20"
+    },
+    {
+      "id": "fa9f",
+      "name": "Kenyatta University",
+      "targetAmount": 20000,
+      "savedAmount": 0,
+      "category": "Institution ",
+      "deadline": "2025-07-16",
+      "createdAt": "2025-07-21"
+    },
+    {
+      "id": "fa9f",
+      "name": "Kenyatta University",
+      "targetAmount": 20000,
+      "savedAmount": 0,
+      "category": "Institution ",
+      "deadline": "2025-07-16",
+      "createdAt": "2025-07-21"
     }
   ]
 }

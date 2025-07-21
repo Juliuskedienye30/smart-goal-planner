@@ -16,7 +16,7 @@ function DepositForm({ goals, onDeposit }) {
 
     const newAmount = selectedGoal.savedAmount + parseFloat(amount);
 
-    fetch(`http://localhost:3000/goals/${goalId}`, {
+    fetch(`https://goal-planner-api-c30z.onrender.com/goals/${goalId}`, {
       method: 'PATCH',
       headers: {
         'Content-Type': 'application/json'
